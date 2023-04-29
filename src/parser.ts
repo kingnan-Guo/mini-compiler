@@ -3,19 +3,19 @@ import { NodeTypes } from "./ast";
 import {
     createRootNode,
     // createStringLiteralNode,
-    creatNumberNode,
+    createNumberLiteralNode,
     createCallExpressionNode,
-    childNode
+    ChildNode
   } from "./ast";
 
 // export interface Node {
 //     type: NodeTypes;
 // }
 
-// type childNode = NumberNode | CallExpressionName
+// type ChildNode = NumberNode | CallExpressionName
 
 // interface RootNode extends Node{
-//     body: childNode[];
+//     body: ChildNode[];
 // }
 
 // interface NumberNode extends Node{
@@ -25,7 +25,7 @@ import {
 
 // interface CallExpressionName extends Node{
 //     name: string,
-//     params: childNode[]
+//     params: ChildNode[]
 // }
 
 // function createRootNode():RootNode {
@@ -44,7 +44,7 @@ import {
 // }
 
 
-// function creatNumberNode(value: string): NumberNode {
+// function createNumberLiteralNode(value: string): NumberNode {
 //     return {
 //         type: NodeTypes.NumberLiteral,
 //         value: value
@@ -69,22 +69,22 @@ export function parser(tokens: Tokens[]) {
             //     type: NodeTypes.NumberLiteral,
             //     value: token.value,
             // }
-            // rootNode.body.push(creatNumberNode(token.value))
+            // rootNode.body.push(createNumberLiteralNode(token.value))
             current++
-            return creatNumberNode(token.value)
+            return createNumberLiteralNode(token.value)
         
         }
         if (token.type === TokenTypes.Paren && token.value === "(") {
             // 移动指针
             token = tokens[++current]
             // 开始创建 CallExpression
-            // const node:childNode = {
+            // const node:ChildNode = {
             //     name: token.value,
             //     type: NodeTypes.CallExpression,
             //     params: []
             // }
     
-            const node:childNode = createCallExpressionNode(token.value)
+            const node = createCallExpressionNode(token.value)
     
             // 移动指针
             token = tokens[++current]
@@ -94,7 +94,7 @@ export function parser(tokens: Tokens[]) {
             while(!(token.type === TokenTypes.Paren && token.value === ")")){
     
                 // if (token.type === TokenTypes.Number) {
-                //     // node.params.push(creatNumberNode(token.value))
+                //     // node.params.push(createNumberLiteralNode(token.value))
 
                 // }
                 node.params.push(walk())

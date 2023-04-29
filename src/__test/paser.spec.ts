@@ -17,8 +17,7 @@ describe("parser", () => {
       { type: TokenTypes.Paren, value: ")" },
     ];
     const ast = {
-      // type: NodeTypes.Program,
-      type: NodeTypes.Root,
+      type: NodeTypes.Program,
       body: [
         {
           type: NodeTypes.CallExpression,
@@ -52,8 +51,7 @@ describe("parser", () => {
   it("number", () => {
     const tokens = [{ type: TokenTypes.Number, value: "2" }];
     const ast = {
-      // type: NodeTypes.Program,
-      type: NodeTypes.Root,
+      type: NodeTypes.Program,
       body: [
         {
           type: NodeTypes.NumberLiteral,
@@ -65,7 +63,7 @@ describe("parser", () => {
   });
 
 
-  it.skip("name", () => {
+  it("name", () => {
     const tokens = [{ type: TokenTypes.String, value: "hello" }];
 
     const ast = {
@@ -96,8 +94,7 @@ describe("parser", () => {
 
     ];
     const ast = {
-      // type: NodeTypes.Program,
-      type: NodeTypes.Root,
+      type: NodeTypes.Program,
       body: [
         {
           type: NodeTypes.CallExpression,
