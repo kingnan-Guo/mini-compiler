@@ -1,52 +1,83 @@
+
 export enum NodeTypes {
-    Root = "Root",
-    Program = "Program",
-    NumberLiteral = "NumberLiteral",
-    StringLiteral = "StringLiteral",
-    CallExpression = "CallExpression",
-    
+  // Root = "Root",
+  NumberLiteral = "NumberLiteral",
+  Program = "Program",
+  StringLiteral = "StringLiteral",
+  CallExpression = "CallExpression",
 }
 
+
+
+export type ChildNode = 
+  | NumberLiteralNode
+  | CallExpressionNode
+  | StringLiteralNode;
 
 export interface Node {
-    type: NodeTypes;
+  type: NodeTypes;
 }
 
-export type childNode = NumberNode | CallExpressionName
-
-export interface RootNode extends Node{
-    body: childNode[];
+export interface NumberLiteralNode extends Node{
+  value: string;
+  type: NodeTypes.NumberLiteral;
 }
 
-export interface NumberNode extends Node{
-    value: string;
+export interface StringLiteralNode extends Node {
+  value: string;
+  type: NodeTypes.StringLiteral;
+}
+
+// export interface CallExpressionName extends Node{
+//     name: string;
+//     params: ChildNode[];
+// }
+export interface CallExpressionNode extends Node {
+  name: string;
+  params: ChildNode[];
+  type: NodeTypes.CallExpression;
+  context?: ChildNode[];
+}
+
+export interface RootNode extends Node {
+    body: ChildNode[];
+    type: NodeTypes.Program;
 }
 
 
-export interface CallExpressionName extends Node{
-    name: string,
-    params: childNode[]
+
+export function createStringLiteralNode(value): StringLiteralNode {
+  return {
+    type: NodeTypes.StringLiteral,
+    value,
+  };
 }
 
-export function createRootNode():RootNode {
+
+
+export function createRootNode(): RootNode {
     return {
-        // type: NodeTypes.Program,
-        type: NodeTypes.Root,
+        type: NodeTypes.Program,
+        // type: NodeTypes.Root,
         body: []
     }
 }
-export function createCallExpressionNode(name:string): CallExpressionName {
-    return {
-        name: name,
-        type: NodeTypes.CallExpression,
-        params: []
-    }
-}
 
 
-export function creatNumberNode(value: string): NumberNode {
+
+export function createNumberLiteralNode(value: string): NumberLiteralNode {
     return {
         type: NodeTypes.NumberLiteral,
         value: value
     }
 }
+
+
+export function createCallExpressionNode(name:string): CallExpressionNode {
+  return {
+      name: name,
+      type: NodeTypes.CallExpression,
+      params: []
+  }
+}
+
