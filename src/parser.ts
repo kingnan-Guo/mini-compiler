@@ -1,49 +1,54 @@
 import { TokenTypes, Tokens } from "./tokenizer";
 import { NodeTypes } from "./ast";
+import {
+    createRootNode,
+    // createStringLiteralNode,
+    creatNumberNode,
+    createCallExpressionNode,
+  } from "./ast";
+
+// export interface Node {
+//     type: NodeTypes;
+// }
+
+// type childNode = NumberNode | CallExpressionName
+
+// interface RootNode extends Node{
+//     body: childNode[];
+// }
+
+// interface NumberNode extends Node{
+//     value: string;
+// }
 
 
-export interface Node {
-    type: NodeTypes;
-}
+// interface CallExpressionName extends Node{
+//     name: string,
+//     params: childNode[]
+// }
 
-type childNode = NumberNode | CallExpressionName
-
-interface RootNode extends Node{
-    body: childNode[];
-}
-
-interface NumberNode extends Node{
-    value: string;
-}
-
-
-interface CallExpressionName extends Node{
-    name: string,
-    params: childNode[]
-}
-
-function createRootNode():RootNode {
-    return {
-        // type: NodeTypes.Program,
-        type: NodeTypes.Root,
-        body: []
-    }
-}
-function createCallExpressionNode(name:string): CallExpressionName {
-    return {
-        name: name,
-        type: NodeTypes.CallExpression,
-        params: []
-    }
-}
+// function createRootNode():RootNode {
+//     return {
+//         // type: NodeTypes.Program,
+//         type: NodeTypes.Root,
+//         body: []
+//     }
+// }
+// function createCallExpressionNode(name:string): CallExpressionName {
+//     return {
+//         name: name,
+//         type: NodeTypes.CallExpression,
+//         params: []
+//     }
+// }
 
 
-function creatNumberNode(value: string): NumberNode {
-    return {
-        type: NodeTypes.NumberLiteral,
-        value: value
-    }
-}
+// function creatNumberNode(value: string): NumberNode {
+//     return {
+//         type: NodeTypes.NumberLiteral,
+//         value: value
+//     }
+// }
 
 
 export function parser(tokens: Tokens[]) {
