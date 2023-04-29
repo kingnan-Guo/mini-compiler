@@ -1,9 +1,10 @@
 export enum TokenTypes {
     Paren,
     Name,
-    Number
+    Number,
+    String
 }
-interface Tokens {
+export interface Tokens {
     type: TokenTypes;
     value: string;
 }
