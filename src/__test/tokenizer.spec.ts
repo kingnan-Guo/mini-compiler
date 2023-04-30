@@ -39,7 +39,7 @@ test("right paren", () => {
 })
 
 test("add", () => {
-    const code = `2`;
+    const code = `add`;
     const tokens = [
         { type: TokenTypes.Name,  value: 'add'},
     ];

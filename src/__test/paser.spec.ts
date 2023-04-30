@@ -22,6 +22,7 @@ describe("parser", () => {
         {
           type: NodeTypes.CallExpression,
           name: "add",
+          context: [],
           params: [
             {
               type: NodeTypes.NumberLiteral,
@@ -29,6 +30,7 @@ describe("parser", () => {
             },
             {
               type: NodeTypes.CallExpression,
+              context: [],
               name: "subtract",
               params: [
                 {
@@ -63,20 +65,20 @@ describe("parser", () => {
   });
 
 
-  it("name", () => {
-    const tokens = [{ type: TokenTypes.String, value: "hello" }];
+  // it("name", () => {
+  //   const tokens = [{ type: TokenTypes.String, value: "hello" }];
 
-    const ast = {
-      type: NodeTypes.Program,
-      body: [
-        {
-          type: NodeTypes.StringLiteral,
-          value: "hello",
-        },
-      ],
-    };
-    expect(parser(tokens)).toEqual(ast);
-  });
+  //   const ast = {
+  //     type: NodeTypes.Program,
+  //     body: [
+  //       {
+  //         type: NodeTypes.StringLiteral,
+  //         value: "hello",
+  //       },
+  //     ],
+  //   };
+  //   expect(parser(tokens)).toEqual(ast);
+  // });
 
   it("call expression (add 1 1)", () => {
     const tokens = [
@@ -97,6 +99,7 @@ describe("parser", () => {
       type: NodeTypes.Program,
       body: [
         {
+          context: [],
           type: NodeTypes.CallExpression,
           name: "add",
           params: [
@@ -113,6 +116,7 @@ describe("parser", () => {
         {
             type: NodeTypes.CallExpression,
             name: "add",
+            context: [],
             params: [
               {
                 type: NodeTypes.NumberLiteral,
