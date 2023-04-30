@@ -13,11 +13,12 @@
 
 import { ChildNode, NodeTypes, RootNode, NumberLiteralNode, CallExpressionNode } from "./ast";
 
-
+type parentNode = RootNode | CallExpressionNode | undefined
+type visitorFunctionType = (node:RootNode | ChildNode, parent:parentNode) => void;
 interface visitorOption {
     // enter: (node:RootNode | ChildNode, parent:RootNode | ChildNode) => void,
-    enter(node:RootNode | ChildNode, parent:RootNode | ChildNode | undefined)
-    exit(node:RootNode | ChildNode, parent:RootNode | ChildNode | undefined)
+    enter:visitorFunctionType;
+    exit?(node:RootNode | ChildNode, parent:parentNode);
 }
 
 export interface Visitor{
@@ -29,13 +30,13 @@ export interface Visitor{
 
 export function traverser(rootNode: RootNode, visitor: Visitor) {
     // console.log("rootNode ", rootNode);
-    function traverserArray(array: ChildNode[], parent?: RootNode | ChildNode | undefined) {
+    function traverserArray(array: ChildNode[], parent?: parentNode) {
         array.forEach((node) => {
             traverserNode(node, parent)
         })
     }
 
-    function traverserNode(node:RootNode | ChildNode,  parent?: RootNode | ChildNode ) {
+    function traverserNode(node:RootNode | ChildNode,  parent?: parentNode) {
  
         //  Visitor 的进入 enter
         const visitorObj = visitor[node.type]
@@ -60,7 +61,7 @@ export function traverser(rootNode: RootNode, visitor: Visitor) {
         }
 
         //  Visitor 的退出 exit
-        if (visitorObj) {
+        if (visitorObj && visitorObj.exit) {
             visitorObj.exit(node, parent)
         }
     }

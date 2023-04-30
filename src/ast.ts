@@ -42,6 +42,7 @@ export interface CallExpressionNode extends Node {
 export interface RootNode extends Node {
     body: ChildNode[];
     type: NodeTypes.Program;
+    context?:ChildNode[];
 }
 
 
@@ -77,7 +78,8 @@ export function createCallExpressionNode(name:string): CallExpressionNode {
   return {
       name: name,
       type: NodeTypes.CallExpression,
-      params: []
+      params: [],
+      context:[]
   }
 }
 
